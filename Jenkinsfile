@@ -24,13 +24,14 @@ pipeline{
             agent {
                 docker {
                     image 'flyway/flyway'
-                    args '-v /flywayDB/sql/:/flyway/sql -v /flywayDB/conf/:/flyway/conf'
+                    args '-rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf migrate'
                     reuseNode true
                 }
             }
+            /*
             steps {
                 sh 'migrate'
-            }
+            }*/
         }
         stage ('Deploy'){
             steps {
