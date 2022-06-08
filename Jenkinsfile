@@ -28,10 +28,9 @@ pipeline{
                     reuseNode true
                 }
             }
-            /*
             steps {
-                sh 'migrate'
-            }*/
+                sh 'echo done!'
+            }
         }
         stage ('Deploy'){
             steps {
