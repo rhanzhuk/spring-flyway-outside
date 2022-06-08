@@ -1,6 +1,12 @@
 pipeline{
     agent any
     stages{
+        stage ('Test path'){
+            steps {
+                sh 'echo $WORKSPACE'
+            }
+        }
+    /*
         stage ('Build jar') {
             agent {
                 docker {
@@ -21,21 +27,14 @@ pipeline{
             }
         }
         stage ('Flyway migrate') {
-            agent {
-                docker {
-                    image 'flyway/flyway'
-                    args '-v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf migrate'
-                    reuseNode true
-                }
-            }
             steps {
-                sh 'echo done!'
+                sh 'docker run -rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf migrate'
             }
         }
         stage ('Deploy'){
             steps {
                 sh 'ssh root@65.108.155.54 "kubectl set image -n flyway deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
             }
-        }
+        }*/
     }
 }
