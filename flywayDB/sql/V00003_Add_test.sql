@@ -1,0 +1,1 @@
+INSERT INTO client VALUES (4, 'TEST', 'TEST', 00, 'test@barcelona.otstoy');
