@@ -24,7 +24,7 @@ pipeline{
             agent {
                 docker {
                     image 'flyway/flyway'
-                    args '-v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf'
+                    args '-v /flywayDB/sql/:/flyway/sql -v /flywayDB/conf/:/flyway/conf'
                     reuseNode true
                 }
             }
