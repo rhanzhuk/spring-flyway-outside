@@ -1,12 +1,6 @@
 pipeline{
     agent any
     stages{
-        stage ('Test path'){
-            steps {
-                sh 'echo $WORKSPACE'
-            }
-        }
-    /*
         stage ('Build jar') {
             agent {
                 docker {
@@ -35,6 +29,6 @@ pipeline{
             steps {
                 sh 'ssh root@65.108.155.54 "kubectl set image -n flyway deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
             }
-        }*/
+        }
     }
 }
