@@ -22,7 +22,7 @@ pipeline{
         }
         stage ('Flyway migrate') {
             steps {
-                sh 'docker run -rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf migrate'
+                sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf migrate'
             }
         }
         stage ('Deploy'){
