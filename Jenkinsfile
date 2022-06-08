@@ -13,15 +13,14 @@ pipeline{
                 sh 'mvn clean install'
             }
         }
-        stage ('Build and push'){
+        stage ('Docker build and push'){
             steps {
                 sh 'docker build -t hanzhukruslan/$JOB_NAME:$BUILD_NUMBER .'
                 sh 'docker push hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
                 sh 'docker rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
             }
         }
-        /*
-        stage ('Build jar') {
+        stage ('Flyway migrate') {
             agent {
                 docker {
                     image 'flyway/flyway'
@@ -35,8 +34,8 @@ pipeline{
         }
         stage ('Deploy'){
             steps {
-                sh 'ssh root@65.108.155.54 "kubectl set image -n flyway deployment/spring-flyway-local spring-flyway-local=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
+                sh 'ssh root@65.108.155.54 "kubectl set image -n flyway deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
             }
-        } */
+        }
     }
 }
