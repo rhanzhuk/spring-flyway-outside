@@ -31,7 +31,7 @@ pipeline{
               }
         stage ('Flyway migrate') {
             steps {
-                sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -url=${env.flyway_url} -user=${env.flyway_user} -password=${env.flyway_password} flyway/flyway migrate'
+                sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=${env.flyway_url} -user=${env.flyway_user} -password=${env.flyway_password} migrate'
             }
         }
         stage ('Deploy'){
