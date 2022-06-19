@@ -26,7 +26,7 @@ pipeline{
                     sh "echo ${env.flyway_url}"
                     sh "echo ${env.flyway_user}"
                     sh "echo ${env.flyway_password}"
-                    sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=${env.flyway_url} -user=${env.flyway_user} -password=${env.flyway_password} migrate'
+                    sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=$flyway_url -user=$flyway_user -password=$flyway_password migrate'
                   }
                 }
               }
