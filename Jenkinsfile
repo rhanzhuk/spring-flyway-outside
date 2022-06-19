@@ -22,7 +22,7 @@ pipeline{
         }
         stage('Vault') {
             steps {
-                withVault(configuration: [timeout: 60, vaultCredentialId: 'Vault-Jenkins-app-role', vaultUrl: 'http://65.108.210.42:8800'], vaultSecrets: [[engineVersion: 2, path: 'secret/db-connects/${env.JOB_NAME}', secretValues: [[envVar: 'flyway_url', vaultKey: 'flyway.url'], [envVar: 'flyway_user', vaultKey: 'flyway.user'], [envVar: 'flyway_password', vaultKey: 'flyway.password']]],]) {
+                withVault(configuration: [timeout: 60, vaultCredentialId: 'Vault-Jenkins-app-role', vaultUrl: 'http://65.108.210.42:8800'], vaultSecrets: [[engineVersion: 2, path: 'secret/db-connects/$JOB_NAME', secretValues: [[envVar: 'flyway_url', vaultKey: 'flyway.url'], [envVar: 'flyway_user', vaultKey: 'flyway.user'], [envVar: 'flyway_password', vaultKey: 'flyway.password']]],]) {
                     sh "echo ${env.flyway_url}"
                     sh "echo ${env.flyway_user}"
                     sh "echo ${env.flyway_password}"
