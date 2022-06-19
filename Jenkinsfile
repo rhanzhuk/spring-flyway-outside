@@ -20,9 +20,18 @@ pipeline{
                 sh 'docker rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
             }
         }
+        stage('Vault') {
+            steps {
+                withVault(configuration: [timeout: 60, vaultCredentialId: 'Vault-Jenkins-app-role', vaultUrl: 'http://65.108.210.42:8800'], vaultSecrets: [[engineVersion: 2, path: 'secret/db-connects/${env.JOB_NAME}', secretValues: [[envVar: 'flyway_url', vaultKey: 'flyway.url'], [envVar: 'flyway_user', vaultKey: 'flyway.user'], [envVar: 'flyway_password', vaultKey: 'flyway.password']]],]) {
+                    sh "echo ${env.flyway_url}"
+                    sh "echo ${env.flyway_user}"
+                    sh "echo ${env.flyway_password}"
+                  }
+                }
+              }
         stage ('Flyway migrate') {
             steps {
-                sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -v $WORKSPACE/flywayDB/conf/:/flyway/conf flyway/flyway migrate'
+                sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql -url=${env.flyway_url} -user=${env.flyway_user} -password=${env.flyway_password} flyway/flyway migrate'
             }
         }
         stage ('Deploy'){
