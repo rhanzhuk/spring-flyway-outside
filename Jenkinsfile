@@ -23,12 +23,7 @@ pipeline{
                 sh 'docker rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
             }
         }
-        stage ('Vault'){
-            steps {
-                curl
-            }
-        }
-        stage("check vault") {
+        stage("Vault and Flyway") {
             steps {
                 withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) {
                     script {
