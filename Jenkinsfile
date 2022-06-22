@@ -34,7 +34,7 @@ pipeline{
                     		def dbUrl = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_url", returnStdout: true).trim()
                     		def dbUser = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_user", returnStdout: true).trim()
                     		def dbPass = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_password", returnStdout: true).trim()
-                    		sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=$dbUrl -user=$dbUser -password=$dbPass migrate'
+                    		sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=${dbUrl} -user=${dbUser} -password=${dbPass} migrate'
                     	} catch (errorVar) {
                     	    println "$errorVar"
                     	}
