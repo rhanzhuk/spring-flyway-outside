@@ -30,11 +30,11 @@ pipeline{
                         try {
                     	    def roleId = sh(script: "curl --header 'X-Vault-Token: $VAULT_TOKEN' $VAULT_ADDR/v1/auth/approle/role/jenkins-role/role-id | jq -r .data.role_id", returnStdout: true).trim()
                     		def secretId = sh(script: "curl --header 'X-Vault-Token: $VAULT_TOKEN' --request POST $VAULT_ADDR/v1/auth/approle/role/jenkins-role/secret-id | jq -r .data.secret_id", returnStdout: true).trim()
-                    		def apiToken = sh(script: """set +x curl -v --request POST --data '{ \"role_id\": \"$roleId\", \"secret_id\": \"$secretId\" }' http://65.108.210.42:8800/v1/auth/approle/login | jq -r .auth.client_token""", returnStdout: true).trim()
+                    		def apiToken = sh(script: """ curl -v --request POST --data '{ \"role_id\": \"$roleId\", \"secret_id\": \"$secretId\" }' http://65.108.210.42:8800/v1/auth/approle/login | jq -r .auth.client_token""", returnStdout: true).trim()
                     		def dbUrl = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_url", returnStdout: true).trim()
                     		def dbUser = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_user", returnStdout: true).trim()
                     		def dbPass = sh(script: "curl  --header 'X-Vault-Token: $apiToken' ${VAULT_ADDR}/v1/secret/data/db-connects/spring-flyway-outside | jq -r .data.data.flyway_password", returnStdout: true).trim()
-                    		sh 'docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=${dbUrl} -user=${dbUser} -password=${dbPass} migrate'
+                    		sh "docker run --rm -v $WORKSPACE/flywayDB/sql/:/flyway/sql flyway/flyway -url=$dbUrl -user=$dbUser -password=$dbPass migrate"
                     	} catch (errorVar) {
                     	    println "$errorVar"
                     	}
