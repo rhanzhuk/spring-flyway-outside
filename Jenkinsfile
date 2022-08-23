@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment {
-        VAULT_ADDR = 'http://65.108.210.185:8811'
+        VAULT_ADDR = 'http://65.108.210.185:8211'
     }
     stages{
         stage ('Build jar') {
