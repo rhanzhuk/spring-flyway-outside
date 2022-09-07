@@ -23,6 +23,7 @@ pipeline{
                 sh 'docker rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
             }
         }
+        /*
         stage("Vault and Flyway") {
             steps {
                 withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) {
@@ -41,10 +42,10 @@ pipeline{
                     }
                 }
             }
-        }
+        }*/
         stage ('Deploy'){
             steps {
-                sh 'ssh root@65.108.155.54 "kubectl set image -n flyway deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
+                sh 'ssh root@65.108.155.54 "kubectl set image -n default deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
             }
         }
     }

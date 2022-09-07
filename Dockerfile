@@ -2,7 +2,7 @@ FROM openjdk:11
 WORKDIR /app
 #COPY flywayDB/ /app/flywayDB/
 COPY target/spring-flyway-outside-0.0.1-SNAPSHOT.jar /app/spring-flyway-outside-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar", "spring-flyway-outside-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar", "spring-flyway-outside-0.0.1-SNAPSHOT.jar","--spring.config.location=/app/config/application.properties"]
 #FROM registry.access.redhat.com/ubi8/openjdk-11:1.11
 #ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 # We make four distinct layers so if there are application changes the library layers can be re-used
