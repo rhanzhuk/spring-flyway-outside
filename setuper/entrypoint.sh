@@ -18,7 +18,7 @@ auto_auth {
 }
 template {
     destination = "/app/config/application.properties"
-    source = /app/config/application.properties.ctmpl
+    source = "/app/config/application.properties.ctmpl"
 }
 EOF
 
