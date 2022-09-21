@@ -9,12 +9,6 @@ auto_auth {
            role = "universal"
        }
    }
-#   sink "file" {
-#       wrap_ttl = "2m"
-#       config = {
-#           path = "/app/vault-token-via-agent"
-#       }
-#   }
 }
 template {
     destination = "/app/config/application.properties"
