@@ -1,8 +1,6 @@
-FROM hanzhukruslan/vault-helper:local as vault-helper
-FROM openjdk:16-jdk-alpine
-RUN apk add --no-cache jq
+########## STABLE VERSION ###########
+FROM hanzhukruslan/openjdk16-vault:helper
 WORKDIR /app
-COPY --from=vault-helper /app/vault /app/vault
 COPY ./setuper/application.properties.ctmpl /app/config/application.properties.ctmpl
 COPY ./setuper/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh

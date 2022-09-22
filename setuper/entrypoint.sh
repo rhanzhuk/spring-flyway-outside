@@ -16,6 +16,6 @@ template {
 }
 EOF
 
-/app/vault agent -config /app/vault-agent.hcl
+/bin/vault agent -config /app/vault-agent.hcl
 cat /app/config/application.properties
 exec "$@"
