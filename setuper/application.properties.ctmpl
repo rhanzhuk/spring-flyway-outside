@@ -1,4 +1,4 @@
-{{ with secret ${SECRET_PATH} }}
+{{ with secret "secret/data/app-conf/spring-flyway-outside/application.properties" }}
     spring.datasource.url={{ index .Data.data "spring.datasource.url" }}
     spring.datasource.username={{ index .Data.data "spring.datasource.username"  }}
     spring.datasource.password={{ index .Data.data "spring.datasource.password" }}
