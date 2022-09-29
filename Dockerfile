@@ -1,5 +1,6 @@
 ########## STABLE VERSION ###########
-FROM gcr.io/distroless/java:11
+FROM openjdk:11
+#FROM gcr.io/distroless/java:11
 WORKDIR /app
 COPY target/spring-flyway-outside-0.0.1-SNAPSHOT.jar /app/spring-flyway-outside-0.0.1-SNAPSHOT.jar
 CMD ["java","-jar", "spring-flyway-outside-0.0.1-SNAPSHOT.jar","--spring.config.location=/app/config/application.properties"]
