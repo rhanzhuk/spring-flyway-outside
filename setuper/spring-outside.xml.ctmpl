@@ -5,7 +5,7 @@
     <modelVersion>{{ .Data.modelVersion }}</modelVersion>
     <parent>
         <groupId>{{ .Data.groupId }}</groupId>
-        <artifactId>{{ .artifactId }}</artifactId>
+        <artifactId>{{ .ArtifactId }}</artifactId>
         <version>{{ .Version }}</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
