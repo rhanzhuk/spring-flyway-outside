@@ -5,8 +5,8 @@
     <modelVersion>{{ .Data.modelVersion }}</modelVersion>
     <parent>
         <groupId>{{ .Data.groupId }}</groupId>
-        <artifactId>{{ .Data.artifactId }}</artifactId>
-        <version>{{ .Data.version }}</version>
+        <artifactId>{{ .artifactId }}</artifactId>
+        <version>{{ .Version }}</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <properties>
