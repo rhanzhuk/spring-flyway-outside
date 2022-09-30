@@ -1,4 +1,4 @@
-{{ with printf "secret/data/app-conf/%s/application.properties" (env "SERVICE_NAME") | secret }}
+{{ with printf "secret/data/app-conf/%s/test/application.properties" (env "SERVICE_NAME") | secret }}
     spring.datasource.url={{ index .Data.data "spring.datasource.url" }}
     spring.datasource.username={{ index .Data.data "spring.datasource.username"  }}
     spring.datasource.password={{ index .Data.data "spring.datasource.password" }}
