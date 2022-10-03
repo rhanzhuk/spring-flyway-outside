@@ -14,5 +14,5 @@ ports = {{ .Data.data.ports }}
 
 [servers.alpha]
 ip = {{ .Data.data.ip }}
-role = {{ .Data.data.role }}
+role = "{{ .Data.data.role }}"
 {{ end }}
