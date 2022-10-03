@@ -1,0 +1,24 @@
+{{ with secret "secret/data/app-conf/spring-flyway-outside/some-xml" }}
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>{{ .Data.data.modelVersion }}</modelVersion>
+    <parent>
+        <groupId>{{ .Data.data.groupId }}</groupId>
+        <artifactId>{{ .Data.data.artifactId }}</artifactId>
+        <version>{{ .Data.data.version }}</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <properties>
+        <java.version>{{ .Data.data.java }}</java.version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+{{ end }}
