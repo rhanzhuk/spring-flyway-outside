@@ -4,7 +4,7 @@
 title = "TOML Example"
 
 [owner]
-name = "{{ .Data.data "name" }}"
+name = {{ .Data.data "name" }}
 
 [database]
 enabled = {{ .Data.data "enabled" }}
@@ -13,6 +13,6 @@ ports = {{ .Data.data "ports" }}
 [servers]
 
 [servers.alpha]
-ip = "{{ .Data.data "ip" }}"
-role = "{{ .Data.data "role" }}"
+ip = {{ .Data.data "ip" }}
+role = {{ .Data.data "role" }}
 {{ end }}
