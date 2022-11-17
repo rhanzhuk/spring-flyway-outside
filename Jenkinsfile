@@ -5,7 +5,9 @@ pipeline{
     }
     stages{
         stage ("Print all vars") {
-            sh 'printenv'
+            steps {
+                sh 'printenv'
+            }
         }
         stage ('Build jar') {
             agent {
