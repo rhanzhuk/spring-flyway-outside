@@ -4,6 +4,9 @@ pipeline{
         VAULT_ADDR = 'http://65.108.210.185:8211'
     }
     stages{
+        stage ("Print all vars") {
+            sh 'printenv'
+        }
         stage ('Build jar') {
             agent {
                 docker {
