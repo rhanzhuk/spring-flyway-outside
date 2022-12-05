@@ -4,12 +4,14 @@ pipeline{
     stages{
         stage("Print vars from library"){
             steps{
-                printVars
+                script{
+                    printVars
+                }
             }
         }
-        stage("Print vars from library"){
+        stage("Test all vars"){
             steps{
-                printVars
+                sh 'printenv'
             }
         }
     }
