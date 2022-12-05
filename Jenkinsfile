@@ -1,3 +1,21 @@
+@Library('my-shared-lib') _
+pipeline{
+    agent any
+    stages{
+        stage("Print vars from library"){
+            steps{
+                printVars
+            }
+        }
+        stage("Print vars from library"){
+            steps{
+                printVars
+            }
+        }
+    }
+}
+
+/*
 pipeline{
     agent any
     environment {
@@ -28,7 +46,7 @@ pipeline{
                 sh 'docker rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER'
             }
         }
-        /*
+
         stage("Vault and Flyway") {
             steps {
                 withCredentials([string(credentialsId: 'VAULT_TOKEN', variable: 'VAULT_TOKEN')]) {
@@ -47,7 +65,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
         stage ('Deploy'){
             steps {
                 sh 'ssh root@65.108.155.54 "kubectl set image -n default deployment/spring-flyway-outside spring-flyway-outside=hanzhukruslan/$JOB_NAME:$BUILD_NUMBER"'
@@ -55,3 +73,4 @@ pipeline{
         }
     }
 }
+*/
