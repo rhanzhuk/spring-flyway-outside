@@ -12,7 +12,7 @@ pipeline{
         stage("Build image"){
             steps{
                 script{
-                    dockerCMD("run -v /var/lib/jenkins/.m2:/root/.m2 maven mvn -f ./pom.xml clean install -Dmaven.test.skip=true")
+                    dockerCMD("run -v '$(pwd)':/opt/maven -w /opt/maven  maven mvn clean install -Dmaven.test.skip=true")
                     dockerCMD ("build -t hanzhukruslan/$JOB_NAME:$BUILD_NUMBER .")
                     dockerCMD ("push hanzhukruslan/$JOB_NAME:$BUILD_NUMBER")
                     dockerCMD ("rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER")
