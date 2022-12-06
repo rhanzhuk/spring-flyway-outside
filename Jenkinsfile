@@ -9,6 +9,16 @@ pipeline{
                 }
             }
         }
+        stage("Build image"){
+            steps{
+                script{
+                    dockerCMD(" run --rm -v /var/lib/jenkins/.m2:/root/.m2 maven mvn clean install -Dmaven.test.skip=true")
+                    dockerCMD ("build -t hanzhukruslan/$JOB_NAME:$BUILD_NUMBER .")
+                    dockerCMD ("push hanzhukruslan/$JOB_NAME:$BUILD_NUMBER")
+                    dockerCMD ("rmi hanzhukruslan/$JOB_NAME:$BUILD_NUMBER")
+                }
+            }
+        }
         stage("Test all vars"){
             steps{
                 sh 'printenv'
