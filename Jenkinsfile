@@ -9,7 +9,7 @@ pipeline{
                 }
             }
         }
-        stage("Build image"){
+/*        stage("Build image"){
             steps{
                 script{
                     dockerCMD("run -v $WORKSPACE:/opt/maven -w /opt/maven  maven mvn clean install -Dmaven.test.skip=true")
@@ -23,7 +23,7 @@ pipeline{
             steps{
                 sh 'printenv'
             }
-        }
+        }*/
     }
 }
 
