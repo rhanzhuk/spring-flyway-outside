@@ -5,7 +5,7 @@ pipeline{
         stage("Print vars from library"){
             steps{
                 script{
-                    printVars()
+                    testVarFromAnotherScript()
                 }
             }
         }
