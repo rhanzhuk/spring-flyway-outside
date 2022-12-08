@@ -2,13 +2,37 @@
 pipeline{
     agent any
     stages{
-        stage("Print vars from library"){
+        stage("Init global var"){
             steps{
                 script{
-                    testVarFromAnotherScript()
+                    initVariable()
                 }
             }
         }
+        stage("Print this vars"){
+            steps{
+                script{
+                    mavenBuild()
+                }
+            }
+        }
+        stage("Build maven"){
+            steps{
+                script{
+                    mavenBuild()
+                }
+            }
+        }
+        stage("Docker build"){
+            steps{
+                script{
+                    dockerImageBuild()
+                }
+            }
+        }
+    }
+}
+
 /*        stage("Build image"){
             steps{
                 script{
@@ -24,8 +48,7 @@ pipeline{
                 sh 'printenv'
             }
         }*/
-    }
-}
+
 
 /*
 pipeline{
