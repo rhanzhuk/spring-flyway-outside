@@ -30,6 +30,13 @@ pipeline{
                 }
             }
         }
+        stage("Deploy image"){
+            steps{
+                script{
+                    deployTok8s()
+                }
+            }
+        }
     }
 }
 
