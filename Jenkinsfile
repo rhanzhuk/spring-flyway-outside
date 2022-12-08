@@ -5,14 +5,14 @@ pipeline{
         stage("Init global var"){
             steps{
                 script{
-                    initVariable()
+                    initVariable.initVar()
                 }
             }
         }
         stage("Print this vars"){
             steps{
                 script{
-                    mavenBuild()
+                    printVars()
                 }
             }
         }
