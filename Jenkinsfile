@@ -5,35 +5,40 @@ pipeline{
         stage("Init global var"){
             steps{
                 script{
-                    initVariable.initVar()
+                    //initVariable.initVar()
+                    printJobsJenkins()
                 }
             }
         }
         stage("Print this vars"){
             steps{
                 script{
-                    printVars()
+                    sh "echo Test"
+                    //printVars()
                 }
             }
         }
         stage("Build maven"){
             steps{
                 script{
-                    mavenBuild()
+                    //mavenBuild()
+                    sh "echo Test"
                 }
             }
         }
         stage("Docker build"){
             steps{
                 script{
-                    dockerImageBuild()
+                    //dockerImageBuild()
+                    sh "echo Test"
                 }
             }
         }
         stage("Deploy image"){
             steps{
                 script{
-                    deployTok8s()
+                    //deployTok8s()
+                    sh "echo Test"
                 }
             }
         }
