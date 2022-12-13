@@ -6,7 +6,7 @@ pipeline{
             steps{
                 script{
                     //initVariable.initVar()
-                    printJobsJenkins()
+                    gitCheck()
                 }
             }
         }
