@@ -2,11 +2,12 @@
 pipeline{
     agent any
     stages{
-        stage("Init global var"){
+        stage("Check vault cred"){
             steps{
                 script{
                     //initVariable.initVar()
-                    gitCheck()
+                    //gitCheck()
+                    vault()
                 }
             }
         }
