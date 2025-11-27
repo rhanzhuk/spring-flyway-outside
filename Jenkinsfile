@@ -2,6 +2,14 @@ pipeline {
     agent any
 
     stages {
+        stage("Maven build") {
+            steps {
+                script {
+                    sh "docker run -v $env.WORKSPACE:/opt/maven -w /opt/maven  maven mvn clean install -Dmaven.test.skip=true"
+                }
+            }
+        }
+
         stage("Build docker image") {
             steps {
                 script {
