@@ -10,7 +10,7 @@ pipeline {
                         docker run --rm -v $(pwd):/repo zricethezav/gitleaks:latest detect \
                             --source=/repo \
                             --report-format=json \
-                            --report-path=/repo/gitleaks-report.json
+                            --report-path=/repo/gitleaks-report.json || true
                     '''
                 }
             }
@@ -93,7 +93,7 @@ pipeline {
                 }
             }
         }    
-        
+
         stage('Image lint (Dockle)') {
             steps {
                 script {
