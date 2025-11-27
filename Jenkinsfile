@@ -2,14 +2,13 @@ pipeline{
     agent any
     stages{
         stage("Build docker image"){
-            steps{
                 script{
                     sh "docker build -t java-sec-demo:${BUILD_NUMBER} ."
                     sh "docker ps"
                     sh "docker rmi java-sec-demo:${BUILD_NUMBER}"
                     //printVars()
                 }
-                
+            
             }
         }
         stage("Print this vars"){
