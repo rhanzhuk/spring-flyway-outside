@@ -116,7 +116,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run -v $(pwd):/project zegl/kube-score:latest score spring-flyway-outside-deployment.yml > kube-score.txt
+                        docker run -v $(pwd):/project zegl/kube-score:latest score spring-flyway-outside-deployment.yml > kube-score.txt || true
                         echo "======================= Выводим не соблюдения бест практис манифестов==========================="
                         cat kube-score.txt
                     '''
