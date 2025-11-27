@@ -1,4 +1,3 @@
-@Library('my-shared-lib') _
 pipeline{
     agent any
     stages{
@@ -7,7 +6,7 @@ pipeline{
                 script{
                     //initVariable.initVar()
                     //gitCheck()
-                    vault()
+                    sh "echo Test"
                 }
             }
         }
