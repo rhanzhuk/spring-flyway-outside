@@ -92,7 +92,8 @@ pipeline {
                     //archiveArtifacts artifacts: 'trivy.txt', allowEmptyArchive: true, fingerprint: true, onlyIfSuccessful: true
                 }
             }
-
+        }    
+        
         stage('Image lint (Dockle)') {
             steps {
                 script {
