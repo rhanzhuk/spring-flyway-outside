@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --rm aquasec/trivy:latest image java-sec-demo:${BUILD_NUMBER} --format table > trivy.txt
+                        docker run --rm aquasec/trivy:latest image --input java-sec-demo:${BUILD_NUMBER}.tar --format table > trivy.txt
                         echo "======================= Выводим таблицу уязвимостей trivy ==========================="
                         cat trivy.txt
                     '''
