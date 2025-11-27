@@ -111,5 +111,22 @@ pipeline {
                 }
             }
         }
+
+        stage('Kube score') {
+            steps {
+                script {
+                    sh '''
+                        docker run -v $(pwd):/project zegl/kube-score:latest score spring-flyway-outside-deployment.yml > kube-score.txt
+                        echo "======================= Выводим не соблюдения бест практис манифестов==========================="
+                        cat kube-score.txt
+                    '''
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'kube-score.txt', fingerprint: true
+                }
+            }
+        }
     }
 }
