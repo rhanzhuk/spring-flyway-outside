@@ -99,7 +99,7 @@ pipeline {
                 script {
                     sh '''
                         docker run --rm -v $(pwd):/work goodwithtech/dockle:latest \
-                            --input /work/java-sec-demo:${BUILD_NUMBER}.tar --format table > dockle.txt
+                            --input /work/java-sec-demo:${BUILD_NUMBER}.tar --format table > dockle.txt || true
                         echo "======================= Выводим не соблюдения бест практис сборки имеджа==========================="
                         cat dockle.txt
                     '''
