@@ -3,9 +3,13 @@ pipeline{
     stages{
         stage("Build docker image"){
             steps{
-                docker build -t java-sec-demo:$BUILD_NUMBER .
-                docker ps
-                docker rmi java-sec-demo:$BUILD_NUMBER
+                script{
+                    sh "docker build -t java-sec-demo:${BUILD_NUMBER} ."
+                    sh "docker ps"
+                    sh "docker rmi java-sec-demo:${BUILD_NUMBER}"
+                    //printVars()
+                }
+                
             }
         }
         stage("Print this vars"){
