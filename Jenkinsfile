@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t java-sec-demo:${BUILD_NUMBER} ."
-                    sh "docker save java-sec-demo:${BUILD_NUMBER} -o java-sec-demo:${BUILD_NUMBER}.tar"
+                    sh "docker save java-sec-demo:${BUILD_NUMBER} -o java-sec-demo-${BUILD_NUMBER}.tar"
                     //sh "docker rmi java-sec-demo:${BUILD_NUMBER}"
                 }
             }
@@ -42,8 +42,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --rm -v $(pwd):/work anchore/syft:latest /work/java-sec-demo:${BUILD_NUMBER}.tar -o json > sbom.json
-                        docker run --rm -v $(pwd):/work anchore/syft:latest /work/java-sec-demo:${BUILD_NUMBER}.tar -o table > sbom.txt
+                        docker run --rm -v $(pwd):/work anchore/syft:latest /work/java-sec-demo-${BUILD_NUMBER}.tar -o json > sbom.json
+                        docker run --rm -v $(pwd):/work anchore/syft:latest /work/java-sec-demo-${BUILD_NUMBER}.tar -o table > sbom.txt
                         echo "======================= Выводим список библиотек в имедже ==========================="
                         cat sbom.txt
                     '''
@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        docker run --rm -v $(pwd):/work aquasec/trivy:latest image --input /work/java-sec-demo:${BUILD_NUMBER}.tar --format table > trivy.txt
+                        docker run --rm -v $(pwd):/work aquasec/trivy:latest image --input /work/java-sec-demo-${BUILD_NUMBER}.tar --format table > trivy.txt
                         echo "======================= Выводим таблицу уязвимостей trivy ==========================="
                         cat trivy.txt
                     '''
@@ -99,7 +99,7 @@ pipeline {
                 script {
                     sh '''
                         docker run --rm -v $(pwd):/work goodwithtech/dockle:latest \
-                            --input /work/java-sec-demo:${BUILD_NUMBER}.tar --format table > dockle.txt || true
+                            --input /work/java-sec-demo-${BUILD_NUMBER}.tar --format table > dockle.txt || true
                         echo "======================= Выводим не соблюдения бест практис сборки имеджа==========================="
                         cat dockle.txt
                     '''
