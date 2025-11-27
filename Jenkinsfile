@@ -1,13 +1,11 @@
 pipeline{
     agent any
     stages{
-        stage("Check vault cred"){
+        stage("Build docker image"){
             steps{
-                script{
-                    //initVariable.initVar()
-                    //gitCheck()
-                    sh "echo Test"
-                }
+                docker build -t java-sec-demo:${BUILD_NUMBER} .
+                docker ps
+                docker rmi java-sec-demo:${BUILD_NUMBER}
             }
         }
         stage("Print this vars"){
